@@ -1,4 +1,4 @@
-# vedio_downloader
+# video_downloader
 
 A new Flutter project.
 
