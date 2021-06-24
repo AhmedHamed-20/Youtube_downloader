@@ -1,10 +1,9 @@
 import 'dart:io';
 
-import 'package:flutter/material.dart';
-import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 import 'package:downloads_path_provider/downloads_path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:vedio_downloader/screens/home_screen.dart';
+import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
 var url = MyHomePageState();
 bool error;
@@ -62,8 +61,8 @@ void getvedio(String url) async {
     // double count = 0;
     // double indicator = 0;
     output.close();
-  } catch (_) {
-    print('Error');
+  } catch (e) {
+    print(e);
     error = true;
   }
 }
@@ -111,8 +110,8 @@ void getaudio(String url) async {
     // double count = 0;
     // double indicator = 0;
     output.close();
-  } catch (_) {
-    print('Error');
+  } catch (e) {
+    print(e);
     error = true;
   }
 }
