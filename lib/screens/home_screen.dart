@@ -1,8 +1,9 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:vedio_downloader/models/getdata.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:vedio_downloader/models/checkConnection.dart';
-import 'package:toast/toast.dart';
+import 'package:vedio_downloader/models/getdata.dart';
 
 bool isbressed = false;
 bool ischange = false;
@@ -124,8 +125,9 @@ class MyHomePageState extends State<MyHomePage> {
                                         duration: Duration(seconds: 3),
                                       ))
                                     : url.text == ''
-                                        ? Toast.show(
-                                            'Please Enter Url', context)
+                                        ? Fluttertoast.showToast(
+                                            msg: 'Please Enter Url',
+                                          )
                                         : getvedio(url.text);
                             isbressed = true;
                             ischange = false;
@@ -163,8 +165,8 @@ class MyHomePageState extends State<MyHomePage> {
                                         duration: Duration(seconds: 3),
                                       ))
                                     : (url.text == '')
-                                        ? Toast.show(
-                                            'Please Enter Url', context)
+                                        ? Fluttertoast.showToast(
+                                            msg: 'Please Enter Url')
                                         : getaudio(url.text);
                             isbressed = true;
                             ischange = false;
