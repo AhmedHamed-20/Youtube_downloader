@@ -10,3 +10,10 @@ enum GetVideoMainfestRequestStatus {
   success,
   error,
 }
+
+enum DownloadVideoRequestStatus {
+  idle,
+  loading,
+  success,
+  error,
+}

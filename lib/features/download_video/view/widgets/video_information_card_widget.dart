@@ -31,8 +31,20 @@ class VideoInformationCardWidget extends StatelessWidget {
               children: [
                 ClipRRect(
                     borderRadius: BorderRadius.circular(AppRadius.r25),
-                    child:
-                        Image.network(state.videoInformation!.videoThumbnail)),
+                    child: Image.network(
+                      errorBuilder: (context, error, stackTrace) => Text(
+                        'Error',
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium
+                            ?.copyWith(color: AppColors.toastError),
+                      ),
+                      state.videoInformation!.videoThumbnail,
+                      loadingBuilder: (context, child, loadingProgress) {
+                        if (loadingProgress == null) return child;
+                        return const CircularProgressIndicator();
+                      },
+                    )),
                 const SizedBox(height: AppHeight.h10),
                 Text(
                   state.videoInformation!.title,
@@ -40,6 +52,7 @@ class VideoInformationCardWidget extends StatelessWidget {
                         color: AppColors.black,
                       ),
                 ),
+                const SizedBox(height: AppHeight.h10),
                 Defaults.defaultButton(
                   color: AppColors.seconderyButtonColor,
                   context: context,

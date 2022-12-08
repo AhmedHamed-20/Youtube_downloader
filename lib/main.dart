@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vedio_downloader/core/network/dio.dart';
 import 'package:vedio_downloader/core/services/service_locator.dart';
 import 'package:vedio_downloader/core/youtube_explode/youtube_explode_helper.dart';
 
@@ -10,6 +11,8 @@ import 'features/download_video/view_model/cubit/video_downloader_bloc_cubit.dar
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   ServiceLocator.init();
+  DioHelper.init();
+  // await FlutterDownloader.initialize(debug: false);
   YoutubeExplodeHelper.init();
   runApp(const MyApp());
 }

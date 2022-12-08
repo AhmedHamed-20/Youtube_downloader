@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:vedio_downloader/core/error/failure.dart';
 import 'package:vedio_downloader/features/download_video/models/base_video_information_model.dart';
@@ -11,6 +14,25 @@ abstract class BaseVideoDownloadRepository {
 
   Future<Either<Failure, VideoMainfestModel>> getVideoDownloadMainfest(
       VideoManifestInforParams params);
+  Future<Either<Failure, String>> downloadVideo(DonwnloadVideoParams params);
+}
+
+class DonwnloadVideoParams extends Equatable {
+  final String url;
+  final String path;
+  final String fileName;
+  final CancelToken cancelToken;
+  final StreamController<double> downloadStreamProgress;
+  const DonwnloadVideoParams(
+      {required this.url,
+      required this.path,
+      required this.fileName,
+      required this.downloadStreamProgress,
+      required this.cancelToken});
+
+  @override
+  List<Object?> get props =>
+      [url, path, fileName, downloadStreamProgress, cancelToken];
 }
 
 class VideoBaseInforParams extends Equatable {
