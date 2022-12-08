@@ -12,7 +12,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   ServiceLocator.init();
   DioHelper.init();
-  // await FlutterDownloader.initialize(debug: false);
   YoutubeExplodeHelper.init();
   runApp(const MyApp());
 }
@@ -28,7 +27,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => serviceLocator<VideoDownloaderCubit>()),
       ],
       child: MaterialApp(
-        title: 'youtube_downloader',
+        title: 'Youtube Downloader',
         theme: AppTheme.lightMode,
         darkTheme: AppTheme.darkMode,
         themeMode: ThemeMode.dark,
