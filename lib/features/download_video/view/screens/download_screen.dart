@@ -45,7 +45,7 @@ class _DownloadScreenState extends State<DownloadScreen> {
           ),
         ),
         body: BlocConsumer<VideoDownloaderCubit, VideoDownloaderState>(
-          listener: (context, state) {
+          listener: (context, state) async {
             if (state.downloadVideoRequestStatus ==
                 DownloadVideoRequestStatus.loading) {
               showDialog(

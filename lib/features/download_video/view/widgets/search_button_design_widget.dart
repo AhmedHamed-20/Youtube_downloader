@@ -15,8 +15,12 @@ class ButtonSearchDesignWidget extends StatelessWidget {
       context: context,
       title: 'Search About Video',
       onPressed: () {
-        videoDownloaderCubit
-            .getVideoInformation(TextEditingControllers.urlController.text);
+        if (videoDownloaderCubit.formKey.currentState?.validate() == false) {
+          return;
+        } else {
+          videoDownloaderCubit
+              .getVideoInformation(TextEditingControllers.urlController.text);
+        }
       },
     );
   }

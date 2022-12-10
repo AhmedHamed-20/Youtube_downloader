@@ -55,7 +55,7 @@ class MainDownloadScreenWidget extends StatelessWidget {
               itemBuilder: (context, index) {
                 return FileInforMationCardWidget(
                   videoName: videoName,
-                  quality: videoMainfest.audioOnly[index].audioCodec,
+                  quality: videoMainfest.audioOnly[index].bitrate.toString(),
                   url: videoMainfest.audioOnly[index].url,
                   subtype: videoMainfest.audioOnly[index].codec.subtype,
                   fileSize: videoMainfest.audioOnly[index].size,

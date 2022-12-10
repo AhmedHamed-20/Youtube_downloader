@@ -19,9 +19,16 @@ class DownloadAlertDialogWidget extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(AppRadius.r10),
             ),
-            title: Text(
-              'Downloading...',
-              style: Theme.of(context).textTheme.titleMedium,
+            title: Visibility(
+              visible: snapshot.data == 1,
+              replacement: Text(
+                'Downloading...',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              child: Text(
+                'Downloaded',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
             ),
             content: Column(
               mainAxisSize: MainAxisSize.min,
@@ -56,11 +63,12 @@ class DownloadAlertDialogWidget extends StatelessWidget {
                   child: Column(
                     children: [
                       Text(
-                        'Downloaded Sccess and saved in Download folder',
+                        'Downloaded Sccess and saved in Youtube Downloader folder',
                         style: Theme.of(context)
                             .textTheme
                             .titleLarge
                             ?.copyWith(color: AppColors.toastSuccess),
+                        textAlign: TextAlign.center,
                       ),
                       const SizedBox(
                         height: AppHeight.h10,

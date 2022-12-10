@@ -3,23 +3,23 @@ import 'package:flutter/material.dart';
 import '../const/const.dart';
 
 class Defaults {
-  static Widget defaultTextField({
+  static Widget defaultTextFormField({
     required BuildContext context,
     required TextEditingController controller,
     required String title,
     Widget suffixIcon = const SizedBox.shrink(),
     ValueChanged<String>? onChanged,
     bool obscureText = false,
-    ValueChanged<String>? onSubmitted,
+    String? Function(String?)? validator,
     TextInputType keyboardType = TextInputType.text,
     Widget prefixIcon = const SizedBox.shrink(),
   }) {
-    return TextField(
+    return TextFormField(
+      validator: validator,
       style: Theme.of(context).textTheme.titleMedium,
       cursorColor: Theme.of(context).iconTheme.color,
       keyboardType: keyboardType,
       onChanged: onChanged,
-      onSubmitted: onSubmitted,
       controller: controller,
       obscureText: obscureText,
       decoration: InputDecoration(

@@ -29,35 +29,56 @@ class FileInforMationCardWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppRadius.r25),
       ),
       child: ListTile(
-        title: Text(
-          quality,
-          style: Theme.of(context)
-              .textTheme
-              .titleMedium
-              ?.copyWith(color: AppColors.black),
+        title: Row(
+          children: [
+            Text(
+              'Quality: ',
+              style: Theme.of(context)
+                  .textTheme
+                  .titleLarge
+                  ?.copyWith(color: AppColors.black),
+            ),
+            Text(
+              quality,
+              style: Theme.of(context)
+                  .textTheme
+                  .titleMedium
+                  ?.copyWith(color: AppColors.black),
+            ),
+          ],
         ),
-        subtitle: Text(
-          fileSize.toString(),
-          style: Theme.of(context)
-              .textTheme
-              .titleSmall
-              ?.copyWith(color: AppColors.black),
+        subtitle: Row(
+          children: [
+            Text(
+              'Size: ',
+              style: Theme.of(context)
+                  .textTheme
+                  .titleMedium
+                  ?.copyWith(color: AppColors.black),
+            ),
+            Text(
+              fileSize.toString(),
+              style: Theme.of(context)
+                  .textTheme
+                  .titleSmall
+                  ?.copyWith(color: AppColors.black),
+            ),
+          ],
         ),
         trailing: TextButton(
           child: Text(
             'Download',
             style: Theme.of(context)
                 .textTheme
-                .titleMedium
+                .titleLarge
                 ?.copyWith(color: AppColors.seconderyButtonColor),
           ),
           onPressed: () async {
-            // Directory appDocDir = await getApplicationDocumentsDirectory();
-            // String appDocPath = appDocDir.path;
-            final directory = Directory('/storage/emulated/0/Download');
-            //print(url.fragment);
-            final file = File('${directory.path}/$videoName.$subtype');
-
+            final directory =
+                Directory('/storage/emulated/0/Youtube Downloader');
+            final removeOrSymbole = videoName.replaceAll('|', '');
+            final fileName = removeOrSymbole.replaceAll('/', '');
+            final file = File('${directory.path}/($fileName).$subtype');
             downloadBloc.downloadVideo(
               cancelToken: cancelToken,
               url: url.toString(),

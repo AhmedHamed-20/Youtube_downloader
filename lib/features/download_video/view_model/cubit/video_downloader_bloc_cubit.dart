@@ -3,9 +3,12 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:vedio_downloader/core/const/const.dart';
 import 'package:vedio_downloader/features/download_video/models/base_video_information_model.dart';
 import 'package:vedio_downloader/features/download_video/repository/base/base_download_video_repository.dart';
+import 'dart:io' show Platform;
 
 import '../../../../core/utls/utls.dart';
 import '../../models/video_manifest_model.dart';
@@ -17,7 +20,7 @@ class VideoDownloaderCubit extends Cubit<VideoDownloaderState> {
       : super(const VideoDownloaderState());
 
   final BaseVideoDownloadRepository baseVideoDownloadRepository;
-
+  final formKey = GlobalKey<FormState>();
   Future<void> getVideoInformation(String url) async {
     emit(state.copyWith(
         videoInforMattionRequsetStatus:
@@ -65,15 +68,43 @@ class VideoDownloaderCubit extends Cubit<VideoDownloaderState> {
     );
   }
 
+  Future<bool> checkPermissions() async {
+    bool isPermissionGranted = false;
+    if (getAndroidVersion() > 10) {
+      if (await Permission.storage.isGranted &&
+          await Permission.accessMediaLocation.isGranted &&
+          await Permission.manageExternalStorage.isGranted) {
+        isPermissionGranted = true;
+      } else {
+        await Permission.storage.request();
+        await Permission.accessMediaLocation.request();
+        await Permission.manageExternalStorage.request();
+      }
+    } else {
+      if (await Permission.storage.isGranted &&
+          await Permission.accessMediaLocation.isGranted) {
+        isPermissionGranted = true;
+      } else {
+        await Permission.storage.request();
+        await Permission.accessMediaLocation.request();
+      }
+    }
+    return isPermissionGranted;
+  }
+
+  int getAndroidVersion() {
+    return int.parse(Platform.operatingSystemVersion.split(' ')[1]);
+  }
+
   Future<void> downloadVideo(
       {required String url,
       required String path,
       required String fileName,
       required StreamController<double> downloadProgress,
       required CancelToken cancelToken}) async {
-    emit(state.copyWith(
-        downloadVideoRequestStatus: DownloadVideoRequestStatus.loading));
-    if (await Permission.storage.isGranted) {
+    if (await checkPermissions()) {
+      emit(state.copyWith(
+          downloadVideoRequestStatus: DownloadVideoRequestStatus.loading));
       final result = await baseVideoDownloadRepository.downloadVideo(
           DonwnloadVideoParams(
               url: url,
@@ -97,7 +128,21 @@ class VideoDownloaderCubit extends Cubit<VideoDownloaderState> {
         );
       });
     } else {
-      await Permission.storage.request();
+      flutterToast(
+          msg: 'Please Accept All Permissions',
+          backgroundColor: AppColors.toastError,
+          textColor: AppColors.white);
     }
+  }
+
+  String? validateUrl(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter url';
+    } else if (RegExp(r"^(https?\:\/\/)?(www\.youtube\.com|youtu\.be)\/.+$")
+            .hasMatch(value) ==
+        false) {
+      return 'Please enter valid url';
+    }
+    return null;
   }
 }
