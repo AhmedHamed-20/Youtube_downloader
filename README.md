@@ -1,16 +1,9 @@
-# video_downloader
+# Youtube Downloader
 
-A new Flutter project.
+Download any youtube video as audio-only or video with different qualities
+## Screenshots 
 
-## Getting Started
+ 
+<img src="https://user-images.githubusercontent.com/72945669/206880946-d77019ae-389b-4e4a-b04e-4819c939f07c.jpg" width="280"> <img src="https://user-images.githubusercontent.com/72945669/206880946-d77019ae-389b-4e4a-b04e-4819c939f07c.jpg" width="280"> <img src="https://user-images.githubusercontent.com/72945669/206880979-f52e5185-c3f3-45ba-945b-f020b378f2fa.jpg" width="280"> <img src="https://user-images.githubusercontent.com/72945669/206880988-e75523b6-bea7-4909-afdc-1b164ee007c8.jpg" width="280"> <img src="https://user-images.githubusercontent.com/72945669/206880994-01814b57-3fa3-4a1f-8a17-9ece58a89454.jpg" width="280"> 
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
