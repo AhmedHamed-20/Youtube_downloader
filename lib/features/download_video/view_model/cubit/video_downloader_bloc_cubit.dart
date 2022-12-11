@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +9,6 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:vedio_downloader/core/const/const.dart';
 import 'package:vedio_downloader/features/download_video/models/base_video_information_model.dart';
 import 'package:vedio_downloader/features/download_video/repository/base/base_download_video_repository.dart';
-import 'dart:io' show Platform;
 
 import '../../../../core/utls/utls.dart';
 import '../../models/video_manifest_model.dart';
@@ -70,7 +70,7 @@ class VideoDownloaderCubit extends Cubit<VideoDownloaderState> {
 
   Future<bool> checkPermissions() async {
     bool isPermissionGranted = false;
-    if (getAndroidVersion() > 10) {
+    if (await getAndroidVersion() > 29) {
       if (await Permission.storage.isGranted &&
           await Permission.accessMediaLocation.isGranted &&
           await Permission.manageExternalStorage.isGranted) {
@@ -92,8 +92,11 @@ class VideoDownloaderCubit extends Cubit<VideoDownloaderState> {
     return isPermissionGranted;
   }
 
-  int getAndroidVersion() {
-    return int.parse(Platform.operatingSystemVersion.split(' ')[1]);
+  Future<int> getAndroidVersion() async {
+    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+
+    AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+    return androidInfo.version.sdkInt;
   }
 
   Future<void> downloadVideo(

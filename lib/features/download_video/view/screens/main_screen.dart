@@ -24,7 +24,7 @@ class MainScreen extends StatelessWidget {
           padding: const EdgeInsets.all(AppPadding.p20),
           child: Column(
             children: [
-              //Image.asset('assets/images/logo.gif'),
+              Image.asset('assets/images/logo.gif'),
               const SizedBox(
                 height: AppHeight.h10,
               ),
