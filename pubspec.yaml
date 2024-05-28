@@ -18,24 +18,27 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.17.6 <3.0.0"
+  sdk: '>=3.3.4 <4.0.0'
 
 dependencies:
-  bloc: ^8.1.0
-  cupertino_icons: ^1.0.2
-  dartz: ^0.10.1
-  device_info_plus: ^8.0.0
-  dio: ^4.0.6
-  equatable: ^2.0.5
+  bloc: null
+  cupertino_icons: null
+  dartz: null
+  device_info_plus: null
+  dio: null
+  direct_link: ^0.2.2
+  equatable: null
   flutter:
     sdk: flutter
-  flutter_bloc: ^8.1.1
-  fluttertoast: ^8.1.1
-  get_it: ^7.2.0
-  google_fonts: ^3.0.1
-  path_provider: ^2.0.11
-  permission_handler: ^8.1.4+2
-  youtube_explode_dart: ^1.10.6
+  flutter_bloc: null
+  flutter_downloader: ^1.11.7
+  fluttertoast: null
+  get_it: null
+  google_fonts: ^6.2.1
+  path_provider: null
+  permission_handler: null
+  url_launcher: ^6.2.6
+  youtube_explode_dart: null
 
 dev_dependencies:
   flutter_lints: ^2.0.0

@@ -7,10 +7,12 @@ class VideoDownloaderState extends Equatable {
   final GetVideoInforormationRequestStatus videoInforMattionRequsetStatus;
   final GetVideoMainfestRequestStatus videoManifestRequsetStatus;
   final DownloadVideoRequestStatus downloadVideoRequestStatus;
+  final SiteModel? siteModel;
   const VideoDownloaderState({
     this.videoInformation,
     this.errorMessage = '',
     this.videoMainfest,
+    this.siteModel,
     this.downloadVideoRequestStatus = DownloadVideoRequestStatus.idle,
     this.videoManifestRequsetStatus = GetVideoMainfestRequestStatus.loading,
     this.videoInforMattionRequsetStatus =
@@ -18,6 +20,7 @@ class VideoDownloaderState extends Equatable {
   });
 
   VideoDownloaderState copyWith({
+    SiteModel? siteModel,
     DownloadVideoRequestStatus? downloadVideoRequestStatus,
     GetVideoMainfestRequestStatus? videoManifestRequsetStatus,
     VideoMainfestModel? videoMainfest,
@@ -26,6 +29,7 @@ class VideoDownloaderState extends Equatable {
     GetVideoInforormationRequestStatus? videoInforMattionRequsetStatus,
   }) {
     return VideoDownloaderState(
+      siteModel: siteModel ?? this.siteModel,
       downloadVideoRequestStatus:
           downloadVideoRequestStatus ?? this.downloadVideoRequestStatus,
       videoMainfest: videoMainfest ?? this.videoMainfest,
@@ -41,6 +45,7 @@ class VideoDownloaderState extends Equatable {
   @override
   List<Object?> get props => [
         videoInformation,
+        siteModel,
         downloadVideoRequestStatus,
         errorMessage,
         videoInforMattionRequsetStatus,

@@ -1,7 +1,9 @@
+import 'package:direct_link/direct_link.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vedio_downloader/core/const/const.dart';
 import 'package:vedio_downloader/core/widgets/defaults.dart';
+import 'package:vedio_downloader/features/download_video/view/widgets/main_download_screen_widget.dart';
 
 import '../../../../core/utls/utls.dart';
 import '../../view_model/cubit/video_downloader_bloc_cubit.dart';
@@ -58,8 +60,12 @@ class VideoInformationCardWidget extends StatelessWidget {
                   context: context,
                   title: 'Go To Download Page',
                   onPressed: () {
+                    print(state.siteModel);
                     navigatePushTo(
-                        navigateTO: const DownloadScreen(), context: context);
+                        navigateTO: DownloadScreen(
+                          siteModel: state.siteModel,
+                        ),
+                        context: context);
                   },
                 ),
               ],

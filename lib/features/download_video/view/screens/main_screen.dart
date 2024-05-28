@@ -16,7 +16,7 @@ class MainScreen extends StatelessWidget {
     final videoDownloadCubit = BlocProvider.of<VideoDownloaderCubit>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Youtube Downloader',
+        title: Text('File Downloader',
             style: Theme.of(context).textTheme.titleLarge),
       ),
       body: SingleChildScrollView(

@@ -11,6 +11,7 @@ import 'features/download_video/view_model/cubit/video_downloader_bloc_cubit.dar
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   ServiceLocator.init();
+  await ServiceLocator.fileDownloaderDi();
   DioHelper.init();
   YoutubeExplodeHelper.init();
   runApp(const MyApp());

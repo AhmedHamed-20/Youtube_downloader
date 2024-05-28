@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
+import 'package:direct_link/direct_link.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -141,11 +142,48 @@ class VideoDownloaderCubit extends Cubit<VideoDownloaderState> {
   String? validateUrl(String? value) {
     if (value == null || value.isEmpty) {
       return 'Please enter url';
-    } else if (RegExp(r"^(https?\:\/\/)?(www\.youtube\.com|youtu\.be)\/.+$")
-            .hasMatch(value) ==
-        false) {
-      return 'Please enter valid url';
     }
     return null;
+  }
+
+  Future<void> fileChecker(String url) async {
+    emit(state.copyWith(
+        videoInforMattionRequsetStatus:
+            GetVideoInforormationRequestStatus.loading));
+    final result = await baseVideoDownloadRepository.fileDownloader(url);
+    result.fold(
+      (l) => emit(
+        state.copyWith(
+          errorMessage: l.message,
+          videoInforMattionRequsetStatus:
+              GetVideoInforormationRequestStatus.error,
+        ),
+      ),
+      (r) => emit(
+        state.copyWith(
+          videoInformation: BaseVideoInformationModel(
+              title: r!.title!,
+              description: r.thumbnail!,
+              url: url,
+              videoThumbnail: r.thumbnail!),
+          siteModel: r,
+          videoInforMattionRequsetStatus:
+              GetVideoInforormationRequestStatus.success,
+        ),
+      ),
+    );
+  }
+
+  Future<void> fileDownloader(String url, String fileName) async {
+    print(url);
+    final result =
+        await baseVideoDownloadRepository.downloadFile(url, fileName);
+    result.fold((l) {
+      print(l);
+    }, (r) {
+      r.listen((event) {
+        print(event.progress);
+      });
+    });
   }
 }

@@ -18,8 +18,10 @@ class ButtonSearchDesignWidget extends StatelessWidget {
         if (videoDownloaderCubit.formKey.currentState?.validate() == false) {
           return;
         } else {
+          // videoDownloaderCubit
+          //     .getVideoInformation(TextEditingControllers.urlController.text);
           videoDownloaderCubit
-              .getVideoInformation(TextEditingControllers.urlController.text);
+              .fileChecker(TextEditingControllers.urlController.text);
         }
       },
     );

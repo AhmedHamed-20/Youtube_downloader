@@ -8,16 +8,15 @@ import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 import '../../view_model/cubit/video_downloader_bloc_cubit.dart';
 
 class FileInforMationCardWidget extends StatelessWidget {
-  const FileInforMationCardWidget(
-      {super.key,
-      required this.quality,
-      required this.url,
-      required this.subtype,
-      required this.videoName,
-      required this.fileSize});
+  const FileInforMationCardWidget({
+    super.key,
+    required this.quality,
+    required this.url,
+    required this.subtype,
+    required this.videoName,
+  });
   final String quality;
-  final Uri url;
-  final FileSize fileSize;
+  final String url;
   final String subtype;
   final String videoName;
   @override
@@ -50,14 +49,14 @@ class FileInforMationCardWidget extends StatelessWidget {
         subtitle: Row(
           children: [
             Text(
-              'Size: ',
+              'Type: ',
               style: Theme.of(context)
                   .textTheme
                   .titleMedium
                   ?.copyWith(color: AppColors.black),
             ),
             Text(
-              fileSize.toString(),
+              subtype,
               style: Theme.of(context)
                   .textTheme
                   .titleSmall
@@ -74,18 +73,12 @@ class FileInforMationCardWidget extends StatelessWidget {
                 ?.copyWith(color: AppColors.seconderyButtonColor),
           ),
           onPressed: () async {
-            final directory =
-                Directory('/storage/emulated/0/Youtube Downloader');
-            final removeOrSymbole = videoName.replaceAll('|', '');
-            final fileName = removeOrSymbole.replaceAll('/', '');
-            final file = File('${directory.path}/($fileName).$subtype');
-            downloadBloc.downloadVideo(
-              cancelToken: cancelToken,
-              url: url.toString(),
-              path: file.path,
-              fileName: 'video',
-              downloadProgress: downloadProgress,
-            );
+            // final directory =
+            //     Directory('/storage/emulated/0/Youtube Downloader');
+            // final removeOrSymbole = videoName.replaceAll('|', '');
+            // final fileName = removeOrSymbole.replaceAll('/', '');
+            // final file = File('${directory.path}/($fileName).$subtype');
+            downloadBloc.fileDownloader(url, videoName);
           },
         ),
       ),
