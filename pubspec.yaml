@@ -21,26 +21,27 @@ environment:
   sdk: '>=3.3.4 <4.0.0'
 
 dependencies:
-  bloc: null
-  cupertino_icons: null
-  dartz: null
-  device_info_plus: null
-  dio: null
-  equatable: null
-  flutter:
-    sdk: flutter
+  bloc: any
+  cupertino_icons: any
+  dartz: any
+  device_info_plus: any
+  dio: any
   direct_link:
     git:
-      url: https://github.com/AhmedMohamed-33/direct_link.git  
-  flutter_bloc: null
+      url: https://github.com/AhmedMohamed-33/direct_link.git
+  equatable: any
+  flutter:
+    sdk: flutter
+  flutter_bloc: any
   flutter_downloader: ^1.11.7
-  fluttertoast: null
-  get_it: null
+  fluttertoast: any
+  get_it: any
   google_fonts: ^6.2.1
-  path_provider: null
-  permission_handler: null
-  url_launcher: ^6.2.6
-  youtube_explode_dart: null
+  path_provider: any
+  permission_handler: any
+  receive_sharing_intent: ^1.8.0
+  url_launcher: any
+  youtube_explode_dart: any
 
 dev_dependencies:
   flutter_lints: ^2.0.0

@@ -1,9 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
 import 'package:direct_link/direct_link.dart';
 import 'package:vedio_downloader/core/error/failure.dart';
 import 'package:vedio_downloader/core/file_checker/file_checker_impl.dart';
-import 'package:vedio_downloader/core/file_downloader_package/file_downloader_impl.dart';
 import 'package:vedio_downloader/core/network/dio.dart';
 import 'package:vedio_downloader/core/services/service_locator.dart';
 import 'package:vedio_downloader/core/youtube_explode/youtube_explode_helper.dart';
@@ -54,8 +52,8 @@ class RemoteVidoDownloadRepository extends BaseVideoDownloadRepository {
       );
 
       return const Right('Downloaded');
-    } on DioError catch (e) {
-      return Left(ServerFailure(message: e.message));
+    } on Exception catch (e) {
+      return Left(ServerFailure(message: e.toString()));
     }
   }
 

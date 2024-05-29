@@ -6,7 +6,6 @@ import 'package:dio/dio.dart';
 import 'package:direct_link/direct_link.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:vedio_downloader/core/const/const.dart';
 import 'package:vedio_downloader/features/download_video/models/base_video_information_model.dart';

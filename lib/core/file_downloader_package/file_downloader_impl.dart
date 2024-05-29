@@ -24,7 +24,6 @@ class FileDownloaderImpl extends FileDownloader {
 
   @override
   Stream<DownloadResult> downloadFile(String fileLink, String fileName) async* {
-    print(fileLink);
     yield* _downloaderDelegate.downloadFile(fileLink, fileName);
   }
 }
@@ -90,10 +89,6 @@ class _AndroidDownloadDelegate extends FileDownloader {
   }
 
   Stream<DownloadResult> _downloadResultInStream(String taskId) async* {
-    print(await _currentOpenedPorts[taskId]!.map((event) {
-      print('======');
-      print(event);
-    }));
     await for (var message in _currentOpenedPorts[taskId]!) {
       yield DownloadResult(
           progress: message[1], status: _downloadStatusMap[message[0]]!);
