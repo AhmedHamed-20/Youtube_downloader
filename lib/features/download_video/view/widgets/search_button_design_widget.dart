@@ -18,12 +18,15 @@ class ButtonSearchDesignWidget extends StatelessWidget {
         if (videoDownloaderCubit.formKey.currentState?.validate() == false) {
           return;
         } else {
-          // videoDownloaderCubit
-          //     .getVideoInformation(TextEditingControllers.urlController.text);
           videoDownloaderCubit
               .fileChecker(TextEditingControllers.urlController.text);
+          dismissKeyboard(context);
         }
       },
     );
+  }
+
+  void dismissKeyboard(BuildContext context) {
+    FocusScope.of(context).unfocus();
   }
 }
