@@ -6,11 +6,13 @@ import 'package:dio/dio.dart';
 import 'package:direct_link/direct_link.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:vedio_downloader/core/const/const.dart';
 import 'package:vedio_downloader/features/download_video/models/base_video_information_model.dart';
 import 'package:vedio_downloader/features/download_video/repository/base/base_download_video_repository.dart';
 
+import '../../../../core/file_downloader_package/base_file_downloader.dart';
 import '../../../../core/utls/utls.dart';
 import '../../models/video_manifest_model.dart';
 
@@ -175,14 +177,30 @@ class VideoDownloaderCubit extends Cubit<VideoDownloaderState> {
   }
 
   Future<void> fileDownloader(String url, String fileName) async {
-    print(url);
+    flutterToast(
+        msg: 'Download started look at notification bar',
+        backgroundColor: Colors.green,
+        textColor: Colors.white);
     final result =
         await baseVideoDownloadRepository.downloadFile(url, fileName);
     result.fold((l) {
-      print(l);
+      flutterToast(
+          msg: l.message, backgroundColor: Colors.red, textColor: Colors.white);
     }, (r) {
       r.listen((event) {
-        print(event.progress);
+        if (event.status == DownloadStatus.Completed) {
+          flutterToast(
+              msg: 'Download Completed',
+              backgroundColor: Colors.green,
+              textColor: Colors.white);
+        }
+
+        if (event.status == DownloadStatus.failed) {
+          flutterToast(
+              msg: 'Download Failed',
+              backgroundColor: Colors.red,
+              textColor: Colors.white);
+        }
       });
     });
   }

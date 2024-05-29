@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vedio_downloader/core/const/const.dart';
 import 'package:vedio_downloader/features/download_video/view/widgets/search_button_design_widget.dart';
 import 'package:vedio_downloader/features/download_video/view_model/cubit/video_downloader_bloc_cubit.dart';
 
@@ -10,8 +11,17 @@ class SearchAboutVideoButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<VideoDownloaderCubit, VideoDownloaderState>(
-        builder: (context, state) {
+    return BlocConsumer<VideoDownloaderCubit, VideoDownloaderState>(
+        listener: (context, state) {
+      if (state.videoInforMattionRequsetStatus ==
+          GetVideoInforormationRequestStatus.error) {
+        flutterToast(
+          msg: state.errorMessage,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+        );
+      }
+    }, builder: (context, state) {
       switch (state.videoInforMattionRequsetStatus) {
         case GetVideoInforormationRequestStatus.idle:
           return const ButtonSearchDesignWidget();
