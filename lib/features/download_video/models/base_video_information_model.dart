@@ -23,5 +23,5 @@ class BaseVideoInformationModel extends Equatable {
   }
 
   @override
-  List<Object?> get props => [title, description, url];
+  List<Object?> get props => [title, description, url, videoThumbnail];
 }

@@ -26,10 +26,12 @@ dependencies:
   dartz: null
   device_info_plus: null
   dio: null
-  direct_link: ^0.2.2
   equatable: null
   flutter:
     sdk: flutter
+  direct_link:
+    git:
+      url: https://github.com/AhmedMohamed-33/direct_link.git  
   flutter_bloc: null
   flutter_downloader: ^1.11.7
   fluttertoast: null
