@@ -14,7 +14,6 @@ class AppTheme {
       backgroundColor: Colors.transparent,
       modalBackgroundColor: Colors.transparent,
     ),
-    backgroundColor: AppColors.backgroundColorWhite,
     textTheme: TextTheme(
       bodyLarge: GoogleFonts.rubik(
           fontSize: AppFontSize.s18, color: AppColors.subtitleTextColor),
@@ -76,7 +75,6 @@ class AppTheme {
       modalBackgroundColor: Colors.transparent,
     ),
 
-    backgroundColor: AppColors.backgroundColorDark,
     textTheme: TextTheme(
       bodyLarge: GoogleFonts.rubik(
           fontSize: AppFontSize.s18, color: AppColors.subtitleTextColor),
