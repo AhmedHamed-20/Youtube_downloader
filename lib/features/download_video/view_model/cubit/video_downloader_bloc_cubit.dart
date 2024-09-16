@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:device_info_plus/device_info_plus.dart';
@@ -101,6 +102,7 @@ class VideoDownloaderCubit extends Cubit<VideoDownloaderState> {
     return androidInfo.version.sdkInt;
   }
 
+//this uses dio download to download the file
   Future<void> downloadVideo(
       {required String url,
       required String path,
@@ -110,11 +112,13 @@ class VideoDownloaderCubit extends Cubit<VideoDownloaderState> {
     if (await checkPermissions()) {
       emit(state.copyWith(
           downloadVideoRequestStatus: DownloadVideoRequestStatus.loading));
+      log(trimVideoNameAndRemoveAllSpecialCharacter(fileName));
+
       final result = await baseVideoDownloadRepository.downloadVideo(
           DonwnloadVideoParams(
               url: url,
               path: path,
-              fileName: fileName,
+              fileName: trimVideoNameAndRemoveAllSpecialCharacter(fileName),
               downloadStreamProgress: downloadProgress,
               cancelToken: cancelToken));
 
@@ -147,6 +151,17 @@ class VideoDownloaderCubit extends Cubit<VideoDownloaderState> {
     return null;
   }
 
+  String trimVideoNameAndRemoveAllSpecialCharacter(String videoName) {
+    String trimmedVideoName = videoName
+        .trim()
+        .replaceAll(RegExp(r'[^\w\s]'), '')
+        .replaceAll(RegExp(r'\s+'), ' ');
+    if (trimmedVideoName.length > 30) {
+      trimmedVideoName = trimmedVideoName.substring(0, 30);
+    }
+    return trimmedVideoName;
+  }
+
   Future<void> fileChecker(String url) async {
     emit(state.copyWith(
         videoInforMattionRequsetStatus:
@@ -175,13 +190,14 @@ class VideoDownloaderCubit extends Cubit<VideoDownloaderState> {
     );
   }
 
+//this uses fileDownloader package
   Future<void> fileDownloader(String url, String fileName) async {
     flutterToast(
         msg: 'Download started look at notification bar',
         backgroundColor: Colors.green,
         textColor: Colors.white);
-    final result =
-        await baseVideoDownloadRepository.downloadFile(url, fileName);
+    final result = await baseVideoDownloadRepository.downloadFile(
+        url, trimVideoNameAndRemoveAllSpecialCharacter(fileName));
     result.fold((l) {
       flutterToast(
           msg: l.message, backgroundColor: Colors.red, textColor: Colors.white);
